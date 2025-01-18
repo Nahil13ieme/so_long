@@ -6,12 +6,15 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 06:47:06 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/17 07:04:06 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/17 08:21:20 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_LOGIC_H
 # define GAME_LOGIC_H
+
+#include "texture.h"
+#include <stdlib.h>
 
 typedef struct s_pos
 {
@@ -53,8 +56,16 @@ typedef struct s_game_context
 	struct s_player			player;
 	struct s_game_object	*game_objects;
 	int						object_count;
-} s_game_context;
+} t_game_context;
 
+typedef struct s_vars
+{
+	void	*mlx;
+	void	*win;
+}			t_vars;
+
+
+void	init_game(void *mlx, t_game_context *game_context);
 void	update();
 
 
