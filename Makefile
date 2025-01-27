@@ -1,37 +1,39 @@
-NAME = so_long
-SRC = $(addprefix src/, main.c game_logic.c texture.c)
+NAME = game_test
 
-OBJ := $(SRC:%.c=%.o)
-GNL_OBJ := $(GNL_SRC:%.c=%.o)
-PRINTF_OBJ := $(PRINTF_SRC:%.c=%.o)
+SRC = $(addprefix src/, main.c game.c player.c level.c entity.c errors.c utils.c enemy.c render.c sprite.c)
+GNL_SRC = $(addprefix gnl_bonus/, get_next_line.c get_next_line_utils.c)
+OBJ = $(SRC:.c=.o)
+GNL_OBJ = $(GNL_SRC:.c=.o)
 
-CC = gcc
-CCFLAGS = -Wextra -Wall -Werror
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+
+LIBFT_DIR = Libft
+LIBFT_LIB = $(LIBFT_DIR)/libft.a
 
 MLX_DIR = minilibx-linux
 MLX_LIB = $(MLX_DIR)/libmlx.a
 
-# Chemin vers les fichiers d'en-tête
-INCLUDES = -Iincludes -Isrc
+INCLUDES = -Iinc -Isrc -I$(LIBFT_DIR)
 
-# All target
 all: $(NAME)
 
-# Link object files and libraries to create the final executable
-$(NAME): $(OBJ) $(GNL_OBJ) $(PRINTF_OBJ)
-	$(CC) $(CCFLAGS) $^ $(MLX_LIB) -L$(MLX_DIR) -lX11 -lXext -lm -o $(NAME)
+$(NAME) : $(OBJ) $(GNL_OBJ) $(LIBFT_LIB)
+	$(CC) $(CFLAGS) $(OBJ) $(GNL_OBJ) $(LIBFT_LIB) $(MLX_LIB) -L$(MLX_DIR) -lX11 -lXext -lm -g -o $@
 
-# Compile .c files into .o files
 %.o: %.c
-	$(CC) $(CCFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -g -o $@
 
-# Clean up object files
+$(LIBFT_LIB):
+	$(MAKE) -C $(LIBFT_DIR)
+
 clean:
-	rm -f $(OBJ) $(GNL_OBJ) $(PRINTF_OBJ)
+	rm -f $(OBJ) $(GNL_OBJ)
+	$(MAKE) -C $(LIBFT_DIR) clean
 
-# Clean up all generated files, including the executable
 fclean: clean
 	rm -f $(NAME)
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
-# Clean and rebuild everything
+
 re: fclean all

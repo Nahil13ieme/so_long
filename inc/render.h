@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/26 13:53:06 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/26 18:38:53 by nbenhami         ###   ########.fr       */
+/*   Created: 2025/01/26 15:36:18 by nbenhami          #+#    #+#             */
+/*   Updated: 2025/01/26 19:10:33 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef RENDER_H
+# define RENDER_H
+
+#include "sprite.h"
 #include "../minilibx-linux/mlx.h"
-#include "stdlib.h"
-#include "../inc/game.h"
-#include "../inc/render.h"
 
-int	handle_key(int keycode, t_vars *vars)
-{
-	if (keycode == 65307)
-	{
-		mlx_destroy_display(vars->mlx);
-		exit(0);
-	}
-	return (0);
-}
+# define WIN_W 800
+# define WIN_H 600
 
-int	main(void)
+typedef struct s_game		t_game;
+typedef struct s_sprite		t_sprite;
+
+typedef struct s_vars
 {
-	t_game	game;
-	
-	init_game(&game);
-	mlx_loop(game.vars.mlx);
-	return (0);
-}
+	void	*mlx;
+	void	*win;
+}	t_vars;
+
+void	init_window(t_game *game);
+void	init_renderer(t_game *game);
+void	clear_display(t_game *game);
+int		init_texture(t_game *game);
+void	render(t_game *game);
+
+#endif //RENDER_H

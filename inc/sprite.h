@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keycode.h                                          :+:      :+:    :+:   */
+/*   sprite.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 14:55:10 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/18 15:07:56 by nbenhami         ###   ########.fr       */
+/*   Created: 2025/01/26 15:30:11 by nbenhami          #+#    #+#             */
+/*   Updated: 2025/01/26 16:45:01 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEYCODE_H
-# define KEYCODE_H
+#ifndef SPRITE_H
+# define SPRITE_H
 
-# define KEY_ESC 65307
-# define KEY_W    119 // ASCII for 'w'
-# define KEY_A     97 // ASCII for 'a'
-# define KEY_S    115 // ASCII for 's'
-# define KEY_D    100 // ASCII for 'd'
+typedef struct s_sprite
+{
+	void	*img_ptr;
+	char	*buffer;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	int		height;
+	int		width;
+}	t_sprite;
 
-#endif
+void	draw_sprite_to_buffer(t_sprite *buffer, t_sprite *sprite, int x_offset, int y_offset);
+
+#endif //SPRITE_H

@@ -1,0 +1,34 @@
+- [X] Initialiser la fenêtre du jeu avec MiniLibX
+- [X] Configurer les paramètres de la fenêtre (taille, titre, etc.)
+- [ ] Initialiser les ressources (textures)
+- [ ] Charger des textures pour le personnage, les ennemis et les objets
+- [ ] Charger les polices pour l'affichage du score, des messages
+- [ ] Configurer la gestion des entrées clavier et souris
+- [ ] Détecter les touches pour déplacer le joueur (flèches, WASD)
+- [ ] Ajouter la détection de clics de souris (si nécessaire)
+- [ ] Gérer la boucle de jeu principale
+- [ ] Créer une fonction de boucle principale (game loop)
+- [ ] Mettre à jour la fenêtre et les objets du jeu à chaque frame
+- [ ] Appeler la fonction de rendu à chaque itération
+- [ ] Créer un personnage jouable
+- [ ] Définir une structure pour le personnage (position, taille, vitesse)
+- [ ] Implémenter la gestion des déplacements du personnage (avec les touches)
+- [ ] Ajouter une animation pour le déplacement (si applicable)
+- [ ] Implémenter les collisions avec le monde
+- [ ] Créer une fonction pour vérifier les collisions avec les murs (obstacles)
+- [ ] Ajouter des obstacles statiques ou dynamiques dans le monde
+- [ ] Ajouter des ennemis
+- [ ] Créer une structure pour les ennemis (position, taille, mouvement)
+- [ ] Implémenter un comportement de mouvement simple (suivre ou se déplacer aléatoirement)
+- [ ] Ajouter des collisions entre le joueur et les ennemis
+- [ ] Ajouter des objets interactifs
+- [ ] Créer des objets à ramasser (power-ups, clés, etc.)
+- [ ] Implémenter la logique pour ramasser ces objets et leurs effets (ex: augmenter la vitesse)
+- [ ] Implémenter la gestion de la santé du joueur
+- [ ] Créer un système de points de vie pour le joueur
+- [ ] Gérer les dégâts pris par le joueur lors des collisions avec des ennemis
+- [ ] Implémenter un système de rendu pour les objets
+- [ ] Dessiner le personnage sur la fenêtre
+- [ ] Dessiner les ennemis et objets dans la scène
+- [ ] Ajouter un arrière-plan
+- [ ] Ajouter des icônes pour les objets collectés

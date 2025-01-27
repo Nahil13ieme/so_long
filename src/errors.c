@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   animator.c                                         :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/19 07:18:44 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/20 14:53:36 by nbenhami         ###   ########.fr       */
+/*   Created: 2025/01/26 15:15:20 by nbenhami          #+#    #+#             */
+/*   Updated: 2025/01/26 16:12:23 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "animator.h"
+#include "../inc/errors.h"
 
-void	free_animator(t_animator *animator)
+void	free_errors(int	i)
 {
-	if (animator)
-	{
-		if (animator->animations)
-			free(animator->animations);
-		free(animator);
-	}
+	(void)i;
 }
