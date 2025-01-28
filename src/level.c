@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:25 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/28 17:59:56 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/28 23:27:25 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	free_level(t_game *game)
 	i = 0;
 	if (game->level.layout)
 	{
-		while (i < game->level.height)
+		while (i < game->level.width)
 		{
 			if (game->level.layout[i])
 				free(game->level.layout[i]);
@@ -76,16 +76,16 @@ t_level	parse_level_info(int fd)
 	t_level	level;
 
 
-	level.height = 0;
+	level.width = 0;
 	level.layout = NULL;
 	while ((line = get_next_line(fd)))
 	{
-		level.layout = ft_realloc(level.layout, sizeof(char *) * (level.height + 1));
-		level.layout[level.height] = ft_strdup(line);
+		level.layout = ft_realloc(level.layout, sizeof(char *) * (level.width + 1));
+		level.layout[level.width] = ft_strdup(line);
 		free(line);
-		level.height++;
+		level.width++;
 	}
-	level.width = ft_strlen(level.layout[0]);
+	level.height = ft_strlen(level.layout[0]);
 	return (level);
 }
 
@@ -97,7 +97,7 @@ void	add_entities(t_game *game, t_level *level)
 
 	i = 0;
 	id = 0;
-	while (i < level->height)
+	while (i < level->width)
 	{
 		j = 0;
 		while (level->layout[i][j])
@@ -105,12 +105,13 @@ void	add_entities(t_game *game, t_level *level)
 			if (level->layout[i][j] == 'W')
 			{
 				add_entities2(&level->entities[id], game->s_manager->wall, id, i, j);
+				level->entities[id].name = "Wall";
 				id++;
 			}
 			if (level->layout[i][j] == 'E')
 			{
 				add_entities2(&level->entities[id], game->s_manager->exit, id, i, j);
-				level->entities->id = id;
+				level->entities[id].name = "Exit";
 				id++;
 			}
 			j++;
@@ -122,8 +123,8 @@ void	add_entities(t_game *game, t_level *level)
 void	add_entities2(t_entity *entity, t_sprite *sprite, int id, int i, int j)
 {
 	entity->id = id;
-	entity->pos = (t_vector2d){i * 16, j * 16};
+	entity->pos = (t_vector2d){j * 16, i * 16};
 	entity->box.min = entity->pos;
-	entity->box.max = (t_vector2d){(i + 1) * 16, (j + 1) * 16};
+	entity->box.max = (t_vector2d){(j + 1) * 16, (i + 1) * 16};
 	entity->sprite = sprite;
 }

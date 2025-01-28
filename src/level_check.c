@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:54:08 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/28 15:22:36 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:43:08 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_level_info(t_level *level)
 	int	j;
 
 	i = 0;
-	while (i < level->height)
+	while (i < level->width)
 	{
 		j = 0;
 		while (level->layout[i][j])
@@ -33,7 +33,7 @@ int	check_level_info(t_level *level)
 				level->entities_count++;
 			j++;
 		}
-		if (level->width != ft_strlen(level->layout[i]))
+		if (level->height != ft_strlen(level->layout[i]))
 			return (0);
 		i++;
 	}
@@ -43,7 +43,7 @@ int	check_level_info(t_level *level)
 
 int	check_borders(int i, int j, char c, t_level *level)
 {
-	if (i == 0 || i == level->height - 1 || j == 0 || j == level->width - 1)
+	if (i == 0 || i == level->width - 1 || j == 0 || j == level->height - 1)
 	{
 		if (c != 'W')
 			return (0);

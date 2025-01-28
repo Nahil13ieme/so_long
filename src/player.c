@@ -38,13 +38,13 @@ void move_player(t_game *game)
 
 	pos.x = game->player.pos.x + game->player.velocity.x;
 	pos.y = game->player.pos.y + game->player.velocity.y;
-	new_hitbox = (t_box){(t_vector2d){pos.x, pos.y}, (t_vector2d){pos.x + 16, pos.y + 16}};
+	new_hitbox = (t_box){(t_vector2d){pos.x + 4, pos.y + 4}, (t_vector2d){pos.x + 12, pos.y + 16}};
 	i = 0;
 	while (i < game->level.entities_count)
 	{
 		if (is_colliding(new_hitbox, game->level.entities[i].box))
         {
-            printf("Collision detected with entity %d\n", i); // Optional for debugging
+            printf("Collision detected with entity %s\n", game->level.entities[i].name); // Optional for debugging
             return; // Stop movement on collision
         }
 		i++;
