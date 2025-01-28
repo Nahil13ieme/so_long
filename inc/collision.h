@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   entity.h                                           :+:      :+:    :+:   */
+/*   collision.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/26 15:21:04 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/28 17:25:12 by nbenhami         ###   ########.fr       */
+/*   Created: 2025/01/28 17:23:45 by nbenhami          #+#    #+#             */
+/*   Updated: 2025/01/28 17:43:36 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENTITY_H
-# define ENTITY_H
+#ifndef COLLISION_H
+# define COLLISION_H
 
 #include "vector2d.h"
-#include "sprite.h"
-#include "collision.h"
 
-typedef struct s_vector2d	t_vector2d;
-typedef struct s_game	t_game;
-
-typedef struct s_entity
+typedef struct s_box
 {
-	int			id;
-	char		*name;
-	int			is_active;
-	t_sprite	*sprite;
-	t_vector2d	pos;
-	t_vector2d	velocity;
-	t_box		box;
-}	t_entity;
+	t_vector2d	min;
+	t_vector2d	max;
+}	t_box;
 
-void		init_entity(t_game *game, char *name, t_entity *entity);
+int	is_colliding(t_box box1, t_box box2);
 
-#endif //ENTITY_H
+#endif  //COLLISION_H

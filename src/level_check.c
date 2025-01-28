@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:54:08 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/28 11:52:54 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/28 15:22:36 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_level_info(t_level *level)
 	int	j;
 
 	i = 0;
-	while (level->layout[i])
+	while (i < level->height)
 	{
 		j = 0;
 		while (level->layout[i][j])
@@ -29,7 +29,7 @@ int	check_level_info(t_level *level)
 				return (0);
 			if (!check_unique_entities(level->layout[i][j], level))
 				return (0);
-			if (level->layout != ' ')
+			if (level->layout[i][j] != ' ' && level->layout[i][j] != 'P')
 				level->entities_count++;
 			j++;
 		}
@@ -66,12 +66,4 @@ int	check_unique_entities(char c, t_level *level)
 			return (0);
 	}
 	return (1);
-}
-
-int	add_entities(t_level *level)
-{
-	level->entities = malloc(sizeof(t_entity) * (level->entities_count + 1));
-	if (!level->entities)
-		return (0);
-	
 }

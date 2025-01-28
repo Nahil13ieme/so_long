@@ -6,6 +6,16 @@
 		"libft.h": "c",
 		"collider.h": "c",
 		"stdio.h": "c",
-		"*.a": "cpp"
+		"*.a": "cpp",
+		"cstdlib": "c",
+		"game.h": "c",
+		"entity.h": "c",
+		"sprite.h": "c",
+		"player.h": "c",
+		"level_check.h": "c",
+		"level.h": "c",
+		"collision.h": "c",
+		"vector2d.h": "c",
+		"initializer_list": "c"
 	}
 }

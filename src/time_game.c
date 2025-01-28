@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   entity.h                                           :+:      :+:    :+:   */
+/*   time_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/26 15:21:04 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/28 17:25:12 by nbenhami         ###   ########.fr       */
+/*   Created: 2025/01/28 16:51:12 by nbenhami          #+#    #+#             */
+/*   Updated: 2025/01/28 16:57:57 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENTITY_H
-# define ENTITY_H
+#include "../inc/time_game.h"
 
-#include "vector2d.h"
-#include "sprite.h"
-#include "collision.h"
+static clock_t	last_frame_time = 0;
 
-typedef struct s_vector2d	t_vector2d;
-typedef struct s_game	t_game;
-
-typedef struct s_entity
+void	cap_fps(void)
 {
-	int			id;
-	char		*name;
-	int			is_active;
-	t_sprite	*sprite;
-	t_vector2d	pos;
-	t_vector2d	velocity;
-	t_box		box;
-}	t_entity;
+	clock_t current_time;
+	clock_t frame_time;
 
-void		init_entity(t_game *game, char *name, t_entity *entity);
+	current_time = clock();
+	frame_time = (current_time - last_frame_time) * 1000 / CLOCKS_PER_SEC;
 
-#endif //ENTITY_H
+	if (frame_time < FRAME_TIME_MS)
+	{
+		usleep((FRAME_TIME_MS - frame_time) * 1000);
+	}
+
+	last_frame_time = clock();
+}

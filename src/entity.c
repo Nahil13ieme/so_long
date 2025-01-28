@@ -6,16 +6,17 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:18 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/28 11:53:59 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/28 14:28:12 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/entity.h"
 #include "../inc/sprite.h"
+#include "../inc/game.h"
 
-void	init_entity()
+void	init_entity(t_game *game, char *name, t_entity *entity)
 {
-	t_entity entity;
-	
-	entity.sprite = new_sprite();
+	(void)game;
+	(void)name;
+	(void)entity;
 }
