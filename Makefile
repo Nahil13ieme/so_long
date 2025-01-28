@@ -1,6 +1,6 @@
 NAME = game_test
 
-SRC = $(addprefix src/, main.c game.c player.c level.c entity.c errors.c utils.c enemy.c render.c sprite.c)
+SRC = $(addprefix src/, main.c game.c player.c level.c entity.c errors.c utils.c enemy.c render.c sprite.c level_check.c)
 GNL_SRC = $(addprefix gnl_bonus/, get_next_line.c get_next_line_utils.c)
 OBJ = $(SRC:.c=.o)
 GNL_OBJ = $(GNL_SRC:.c=.o)

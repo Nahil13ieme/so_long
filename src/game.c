@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:21 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/26 19:10:26 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:37:12 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	game_loop(t_game *game)
 void	init_game(t_game *game)
 {
 	init_window(game);
+	if (!init_level(game))
+		free_game(game);
 	if (!init_texture(game))
 		free_game(game);
 	mlx_hook(game->vars.win, 2, 1L << 0, handle_input, game);

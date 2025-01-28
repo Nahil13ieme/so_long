@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:25 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/28 00:10:52 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:48:18 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,28 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
-#include <string.h>
-#include "../gnl_bonus/get_next_line.h"
+#include "../inc/level_check.h"
 
 /*
 Regrouper les infos pour la carte, puis charger les textures suivant les objets de la carte
 */
+
+void	free_level(t_game *game);
+int		init_level(t_game *game);
+t_level	parse_level_info(int fd);
 
 void	free_level(t_game *game)
 {
 	int	i;
 
 	i = 0;
-	while (game->level.layout)
+	while (game->level.layout[i])
 	{
 		if (game->level.layout[i])
 			free(game->level.layout[i]);
 		i++;
 	}
+
 	free(game->level.layout);
 }
 
@@ -44,7 +48,12 @@ int	init_level(t_game *game)
 	if (fd == -1)
 		return (0);
 	game->level = parse_level_info(fd);
-	if (!check_level_info(game->level))
+	game->level.is_done = 0;
+	game->level.has_exit = 0;
+	game->level.has_player = 0;
+	game->level.entities_count = 0;
+	game->level.entities = NULL;
+	if (!check_level_info(&game->level))
 	{
 		free_level(game);
 		return (0);
@@ -57,35 +66,18 @@ t_level	parse_level_info(int fd)
 {
 	char	*line;
 	t_level	level;
-	
+
 	line = get_next_line(fd);
-	level.height = 1;
-	level.layout = ft_realloc(level.layout, sizeof(char *) * (level.height + 1));
-	level.layout[level.height] = ft_strdup(line);
+	level.width = ft_strlen(line);
+	level.height = 0;
+	level.layout = NULL;
 	while (line)
 	{
-		level.layout = ft_realloc(level.layout, sizeof(char *) * (level.height + 1));
+		level.layout = realloc(level.layout, sizeof(char *) * (level.height + 1));
 		level.layout[level.height] = ft_strdup(line);
 		free(line);
+		line = get_next_line(fd);
 		level.height++;
 	}
 	return (level);
-}
-
-int	check_level_info(t_level level)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (level.layout[i]
-	{
-		while (layout[i][j])
-		{
-			if (!check_borders(i, j, layout[i][j]))
-			j++;
-		}
-		i++;
-	})
-	return (1);
 }
