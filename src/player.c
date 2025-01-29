@@ -1,4 +1,3 @@
-#include "player.h"
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:11 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/26 15:15:12 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/29 00:27:01 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +29,7 @@ int	init_player(t_game *game, t_player *player)
 	return (1);
 }
 
-void move_player(t_game *game)
+void	move_player(t_game *game)
 {
 	t_vector2d	pos;
 	t_box		new_hitbox;
@@ -38,15 +37,13 @@ void move_player(t_game *game)
 
 	pos.x = game->player.pos.x + game->player.velocity.x;
 	pos.y = game->player.pos.y + game->player.velocity.y;
-	new_hitbox = (t_box){(t_vector2d){pos.x + 4, pos.y + 4}, (t_vector2d){pos.x + 12, pos.y + 16}};
+	new_hitbox = (t_box){(t_vector2d){pos.x + 4, pos.y + 4},
+		(t_vector2d){pos.x + 12, pos.y + 16}};
 	i = 0;
 	while (i < game->level.entities_count)
 	{
 		if (is_colliding(new_hitbox, game->level.entities[i].box))
-        {
-            printf("Collision detected with entity %s\n", game->level.entities[i].name); // Optional for debugging
-            return; // Stop movement on collision
-        }
+			return ;
 		i++;
 	}
 	game->player.pos = pos;

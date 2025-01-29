@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:21 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/28 17:48:17 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/29 00:54:28 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../inc/render.h"
 #include "../inc/time_game.h"
 
-void free_game(t_game *game)
+void	free_game(t_game *game)
 {
 	free_level(game);
 	if (game->s_manager)
@@ -34,7 +34,7 @@ int	handle_keypress(int keycode, t_game *game)
 		free_game(game);
 		exit(0);
 	}
-	 if (keycode == 'w')
+	if (keycode == 'w')
 		game->player.velocity.y = -1;
 	if (keycode == 'a')
 		game->player.velocity.x = -1;

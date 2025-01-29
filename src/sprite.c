@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:50:49 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/28 16:45:07 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/29 00:51:39 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,32 +44,33 @@ t_sprite_manager	*init_sprite_manager(t_game	*game)
 	return (tmp);
 }
 
-void draw_sprite_to_buffer(t_sprite *buffer, t_sprite *sprite, int x_offset, int y_offset)
+void	draw_sprite_to_buffer(t_sprite *buffer, t_sprite *sprite, int x_offset,
+	int y_offset)
 {
-	int				y = 0;
-	int				x = 0;
+	int				y;
+	int				x;
 	char			*src_pixel;
 	unsigned int	color;
 	char			*dst_pixel;
 
 	if (!buffer->buffer || !sprite->buffer)
-		return ;	
-	while (y < sprite->height)
+		return ;
+	y = -1;
+	while (++y < sprite->height)
 	{
-		x = 0;
-		while (x < sprite->width)
+		x = -1;
+		while (++x < sprite->width)
 		{
-			src_pixel = sprite->buffer + (y * sprite->line_len + x * (sprite->bpp / 8));
+			src_pixel = sprite->buffer
+				+ (y * sprite->line_len + x * (sprite->bpp / 8));
 			color = *(unsigned int *)src_pixel;
 			if (color != 0xFF000000)
 			{
-				dst_pixel = buffer->buffer + ((y + y_offset) *
-					buffer->line_len + (x + x_offset) * (buffer->bpp / 8));
+				dst_pixel = buffer->buffer + ((y + y_offset) * buffer->line_len
+						+ (x + x_offset) * (buffer->bpp / 8));
 				*(unsigned int *)dst_pixel = color;
 			}
-			x++;
 		}
-		y++;
 	}
 }
 
@@ -83,13 +84,15 @@ t_sprite	*new_sprite(void *mlx, char *filepath)
 	tmp->endian = 0;
 	if (!tmp)
 		return (NULL);
-	tmp->img_ptr = mlx_xpm_file_to_image(mlx, filepath, &tmp->width, &tmp->height);
+	tmp->img_ptr = mlx_xpm_file_to_image(mlx, filepath,
+			&tmp->width, &tmp->height);
 	if (!tmp->img_ptr)
 	{
 		free(tmp);
 		return (NULL);
 	}
-	tmp->buffer = mlx_get_data_addr(tmp->img_ptr, &tmp->bpp, &tmp->line_len, &tmp->endian);
+	tmp->buffer = mlx_get_data_addr(tmp->img_ptr,
+			&tmp->bpp, &tmp->line_len, &tmp->endian);
 	if (!tmp->buffer)
 	{
 		mlx_destroy_image(mlx, tmp->img_ptr);

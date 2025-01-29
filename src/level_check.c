@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:54:08 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/28 18:43:08 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/29 00:53:15 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	check_level_info(t_level *level)
 		j = 0;
 		while (level->layout[i][j])
 		{
-			if (!level->layout[i][j] && !check_borders(i, j, level->layout[i][j], level))
+			if (!level->layout[i][j] && !check_borders(i,
+				j, level->layout[i][j], level))
 				return (0);
 			if (!check_unique_entities(level->layout[i][j], level))
 				return (0);
@@ -37,7 +38,6 @@ int	check_level_info(t_level *level)
 			return (0);
 		i++;
 	}
-
 	return (1);
 }
 
