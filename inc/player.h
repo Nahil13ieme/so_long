@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:21:12 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/28 17:02:55 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:10:00 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@ typedef struct s_game	t_game;
 
 typedef struct s_player
 {
+	int			key;
+	int			step;
 	t_vector2d	pos;
+	t_vector2d	last_pos;
 	t_vector2d	velocity;
 	t_sprite	*sprite;	
 }	t_player;
 
 int		init_player(t_game *game, t_player *player);
 void	move_player(t_game *game);
+void	remove_key(t_game *game, int id);;
 
 #endif //PLAYER_H

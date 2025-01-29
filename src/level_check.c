@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   level_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:54:08 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/29 00:53:15 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:45:31 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/level_check.h"
 #include "../inc/level.h"
 #include "../inc/entity.h"
+#include "../inc/game.h"
 
 int	check_level_info(t_level *level)
 {
@@ -65,5 +66,14 @@ int	check_unique_entities(char c, t_level *level)
 		if (level->has_exit != 1)
 			return (0);
 	}
+	if (c == 'K')
+		level->key_count += 1;
 	return (1);
+}
+
+void	check_key_looted(t_game *game)
+{
+	if (game->level.key_count != game->player.key)
+		return ;
+	game->level.is_done = 1;
 }

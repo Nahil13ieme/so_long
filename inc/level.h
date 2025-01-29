@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   level.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:21:10 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/29 00:45:39 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:28:48 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_level
 	int			has_player;
 	int			has_exit;
 	int			entities_count;
+	int			key_count;
 	t_entity	*entities;
 }	t_level;
 
@@ -37,6 +38,4 @@ void	free_level(t_game *game);
 int		init_level(t_game *game);
 t_level	parse_level_info(int fd);
 void	add_entities(t_game *game, t_level *level);
-void	add_entities2(t_entity *entity, t_sprite *sprite, int *id, t_vector2d pos);
-
 #endif //LEVEL_H

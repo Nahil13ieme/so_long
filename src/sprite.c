@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:50:49 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/29 00:51:39 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:25:07 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@
 
 void	free_sprite_manger(t_game *game)
 {
-	mlx_destroy_image(game->vars.mlx, game->s_manager->wall->img_ptr);
-	mlx_destroy_image(game->vars.mlx, game->s_manager->exit->img_ptr);
-	mlx_destroy_image(game->vars.mlx, game->s_manager->key->img_ptr);
-	mlx_destroy_image(game->vars.mlx, game->s_manager->player->img_ptr);
+	if (game->s_manager->wall)
+		mlx_destroy_image(game->vars.mlx, game->s_manager->wall->img_ptr);
+	if (game->s_manager->exit)
+		mlx_destroy_image(game->vars.mlx, game->s_manager->exit->img_ptr);
+	if (game->s_manager->key)
+		mlx_destroy_image(game->vars.mlx, game->s_manager->key->img_ptr);
+	if (game->s_manager->player)
+		mlx_destroy_image(game->vars.mlx, game->s_manager->player->img_ptr);
 	free(game->s_manager->wall);
 	free(game->s_manager->exit);
 	free(game->s_manager->key);
@@ -64,7 +68,7 @@ void	draw_sprite_to_buffer(t_sprite *buffer, t_sprite *sprite, int x_offset,
 			src_pixel = sprite->buffer
 				+ (y * sprite->line_len + x * (sprite->bpp / 8));
 			color = *(unsigned int *)src_pixel;
-			if (color != 0xFF000000)
+			if (color && color != 0xFF000000)
 			{
 				dst_pixel = buffer->buffer + ((y + y_offset) * buffer->line_len
 						+ (x + x_offset) * (buffer->bpp / 8));
@@ -79,9 +83,6 @@ t_sprite	*new_sprite(void *mlx, char *filepath)
 	t_sprite	*tmp;
 
 	tmp = malloc(sizeof(t_sprite));
-	tmp->line_len = 0;
-	tmp->bpp = 0;
-	tmp->endian = 0;
 	if (!tmp)
 		return (NULL);
 	tmp->img_ptr = mlx_xpm_file_to_image(mlx, filepath,

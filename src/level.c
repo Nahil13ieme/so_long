@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   level.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:25 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/29 00:45:06 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:43:47 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/game.h"
 #include "../inc/player.h"
+#include "../inc/entity.h"
 #include "../Libft/libft.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -60,6 +61,7 @@ int	init_level(t_game *game)
 	game->level.has_exit = 0;
 	game->level.has_player = 0;
 	game->level.entities_count = 0;
+	game->level.key_count = 0;
 	game->level.entities = NULL;
 	if (!check_level_info(&game->level)
 		|| game->level.height < 4 || game->level.width < 4)
@@ -96,9 +98,10 @@ t_level	parse_level_info(int fd)
 
 void	add_entities(t_game *game, t_level *level)
 {
-	int	i;
-	int	j;
-	int	id;
+	int			i;
+	int			j;
+	int			id;
+	t_vector2d	pos;
 
 	i = 0;
 	id = 0;
@@ -107,28 +110,15 @@ void	add_entities(t_game *game, t_level *level)
 		j = 0;
 		while (level->layout[i][j])
 		{
+			pos = (t_vector2d){i, j};
 			if (level->layout[i][j] == 'W')
-				add_entities2(&level->entities[id],
-					game->s_manager->wall, &id, (t_vector2d){i, j});
+				level->entities[id] = new_entity(game->s_manager->wall, WALL, &id, pos);
 			if (level->layout[i][j] == 'E')
-				add_entities2(&level->entities[id],
-					game->s_manager->exit, &id, (t_vector2d){i, j});
+				level->entities[id] = new_entity(game->s_manager->exit, EXIT, &id, pos);
 			if (level->layout[i][j] == 'K')
-				add_entities2(&level->entities[id],
-					game->s_manager->key, &id, (t_vector2d){i, j});
+				level->entities[id] = new_entity(game->s_manager->key, KEY, &id, pos);
 			j++;
 		}
 		i++;
 	}
-}
-
-void	add_entities2(t_entity *entity, t_sprite *sprite,
-	int *id, t_vector2d pos)
-{
-	entity->id = *id;
-	entity->pos = (t_vector2d){pos.y * 16, pos.x * 16};
-	entity->box.min = entity->pos;
-	entity->box.max = (t_vector2d){(pos.y + 1) * 16, (pos.x + 1) * 16};
-	entity->sprite = sprite;
-	*id += 1;
 }

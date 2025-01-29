@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:21:09 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/28 15:07:04 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:03:53 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@
 #include "player.h"
 #include "enemy.h"
 #include "errors.h"
+#include "level_check.h"
 
 typedef struct s_vars	t_vars;
 
 typedef struct s_game
 {
+	int					stop;
 	t_player			player;
 	t_vars				vars;
 	t_sprite			main_buffer;

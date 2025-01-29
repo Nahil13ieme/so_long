@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:36:16 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/29 00:25:20 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:35:37 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	render(t_game *game)
 	i = 0;
 	while (i < game->level.entities_count)
 	{
-		if (game->level.entities[i].sprite)
+		if (game->level.entities[i].sprite && game->level.entities[i].is_active)
 			draw_sprite_to_buffer(&game->main_buffer,
 				game->level.entities[i].sprite, game->level.entities[i].pos.x,
 				game->level.entities[i].pos.y);
