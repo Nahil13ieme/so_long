@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:50:49 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/29 18:25:07 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:31:34 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	draw_sprite_to_buffer(t_sprite *buffer, t_sprite *sprite, int x_offset,
 		while (++x < sprite->width)
 		{
 			src_pixel = sprite->buffer
-				+ (y * sprite->line_len + x * (sprite->bpp / 8));
+				+ ((y * sprite->line_len) + (x * (sprite->bpp / 8)));
 			color = *(unsigned int *)src_pixel;
 			if (color && color != 0xFF000000)
 			{

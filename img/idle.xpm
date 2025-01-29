@@ -6,7 +6,6 @@ static char *idle[] = {
 ". c #333C3A",
 "X c #DADAD8",
 "o c #F4F4F4",
-"f c #5555557c",
 "O c None",
 /* pixels */
 "OOOOOOOOOOOOOOOO",
