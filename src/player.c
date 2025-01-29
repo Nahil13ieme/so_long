@@ -6,13 +6,14 @@
 /*   By: nbenhami <nbenhami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:11 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/29 17:16:48 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/29 19:08:30 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/game.h"
 #include "../inc/player.h"
 #include "../inc/collision.h"
+#include "../inc/utils.h"
 #include <math.h>
 
 int	init_player(t_game *game, t_player *player)
@@ -27,6 +28,7 @@ int	init_player(t_game *game, t_player *player)
 		printf("failed init player");
 		return (0);
 	}
+	player->hit_box = draw_box(game, (t_vector2d){0, 0}, (t_vector2d){16, 16});
 	player->velocity.x = 0;
 	player->velocity.y = 0;
 	player->key = 0;

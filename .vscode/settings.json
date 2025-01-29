@@ -16,6 +16,8 @@
 		"level.h": "c",
 		"collision.h": "c",
 		"vector2d.h": "c",
-		"initializer_list": "c"
+		"initializer_list": "c",
+		"utils.h": "c",
+		"stdlib.h": "c"
 	}
 }

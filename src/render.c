@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:36:16 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/29 16:35:37 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/29 19:12:34 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ void	render(t_game *game)
 	}
 	draw_sprite_to_buffer(&game->main_buffer, game->player.sprite,
 		game->player.pos.x, game->player.pos.y);
+	if (game->show_hitbox == 1)
+		draw_sprite_to_buffer(&game->main_buffer, game->player.hit_box,
+			game->player.pos.x, game->player.pos.y);
 	mlx_put_image_to_window(game->vars.mlx, game->vars.win,
 		game->main_buffer.img_ptr, 0, 0);
 }

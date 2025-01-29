@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:21 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/29 18:26:47 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/29 19:16:14 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	free_game(t_game *game)
 	free_level(game);
 	if (game->s_manager)
 		free_sprite_manger(game);
-	if (game->main_buffer.img_ptr && game->main_buffer.buffer)
+	mlx_destroy_image(game->vars.mlx, game->player.hit_box->img_ptr);
+	free(game->player.hit_box);
+	if (game->main_buffer.img_ptr)
 		mlx_destroy_image(game->vars.mlx, game->main_buffer.img_ptr);
 	mlx_destroy_window(game->vars.mlx, game->vars.win);
 	mlx_destroy_display(game->vars.mlx);
@@ -42,6 +44,8 @@ int	handle_keypress(int keycode, t_game *game)
 		game->player.velocity.y = 2;
 	if (keycode == 'd')
 		game->player.velocity.x = 2;
+	if (keycode == 'b')
+		game->show_hitbox *= -1;
 	return (0);
 }
 
@@ -53,14 +57,17 @@ int	handle_key_release(int keycode, t_game *game)
 		game->player.velocity.x = 0;
 	return (0);
 }
-
+/*
+	I need to cap fps for the velocity to works. ( like old bethesda game )
+	else my velocity will be too high;
+*/
 int	game_loop(t_game *game)
 {
-	render(game);
 	move_player(game);
 	check_key_looted(game);
 	if (game->stop)
 		free_game(game);
+	render(game);
 	cap_fps();
 	return (1);
 }
@@ -68,6 +75,7 @@ int	game_loop(t_game *game)
 void	init_game(t_game *game)
 {
 	game->stop = 0;
+	game->show_hitbox = -1;
 	init_window(game);
 	if (!init_texture(game))
 		free_game(game);
