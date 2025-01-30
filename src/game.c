@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:21 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/29 19:16:14 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:43:36 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@
 
 void	free_game(t_game *game)
 {
-	free_level(game);
 	if (game->s_manager)
-		free_sprite_manger(game);
-	mlx_destroy_image(game->vars.mlx, game->player.hit_box->img_ptr);
-	free(game->player.hit_box);
+		free_sprite_manager(game);
 	if (game->main_buffer.img_ptr)
 		mlx_destroy_image(game->vars.mlx, game->main_buffer.img_ptr);
 	mlx_destroy_window(game->vars.mlx, game->vars.win);
@@ -58,7 +55,7 @@ int	handle_key_release(int keycode, t_game *game)
 	return (0);
 }
 /*
-	I need to cap fps for the velocity to works. ( like old bethesda game )
+	I need to cap fps for the velocity to works,
 	else my velocity will be too high;
 */
 int	game_loop(t_game *game)
@@ -77,13 +74,9 @@ void	init_game(t_game *game)
 	game->stop = 0;
 	game->show_hitbox = -1;
 	init_window(game);
-	if (!init_texture(game))
-		free_game(game);
+	init_texture(game);
 	game->s_manager = init_sprite_manager(game);
-	if (!game->s_manager)
-		free_game(game);
-	if (!init_level(game))
-		free_game(game);
+	init_level(game);
 	mlx_hook(game->vars.win, 2, 1L << 0, handle_keypress, game);
 	mlx_hook(game->vars.win, 3, 1L << 1, handle_key_release, game);
 	mlx_loop_hook(game->vars.mlx, game_loop, game);

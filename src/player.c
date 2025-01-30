@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:11 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/29 19:08:30 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:23:28 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,19 @@
 
 int	init_player(t_game *game, t_player *player)
 {
-	player->pos.x = 75;
-	player->pos.y = 75;
+	player->pos.x = game->level.start.x * 16;
+	player->pos.y = game->level.start.y * 16;
 	player->last_pos = player->pos;
 	player->step = 0;
 	player->sprite = game->s_manager->player;
+	player->hitbox.min = (t_vector2d){player->pos.x - 1, player->pos.y};
+	player->hitbox.max = (t_vector2d){player->pos.x + 12, player->pos.y + 16};
 	if (!player->sprite || !player->sprite->buffer)
 	{
 		printf("failed init player");
 		return (0);
 	}
-	player->hit_box = draw_box(game, (t_vector2d){0, 0}, (t_vector2d){16, 16});
+	player->hit_box = draw_box(game->vars.mlx, player->hitbox.min, player->hitbox.max);
 	player->velocity.x = 0;
 	player->velocity.y = 0;
 	player->key = 0;
@@ -43,10 +45,10 @@ void	move_player(t_game *game)
 
 	pos.x = game->player.pos.x + game->player.velocity.x;
 	pos.y = game->player.pos.y + game->player.velocity.y;
-	new_hitbox = (t_box){(t_vector2d){pos.x + 4, pos.y + 4},
-		(t_vector2d){pos.x + 12, pos.y + 16}};
-	i = 0;
-	while (i < game->level.entities_count)
+	new_hitbox = (t_box){(t_vector2d){pos.x + 1, pos.y + 2},
+		(t_vector2d){pos.x + 12, pos.y + 15}};
+	i = -1;
+	while (++i < game->level.entities_count)
 	{
 		if (is_colliding(new_hitbox, game->level.entities[i].box)
 			&& game->level.entities[i].is_active)
@@ -59,15 +61,19 @@ void	move_player(t_game *game)
 				if (game->level.is_done)
 					game->stop = 1;
 		}
-		i++;
 	}
-	if (abs(game->player.pos.x - game->player.last_pos.x) >= 16 || abs(game->player.pos.y - game->player.last_pos.y) >= 16)
-	{
-		game->player.last_pos = pos;
-		game->player.step++;
-		printf("Step %d\n",game->player.step);
-	}
+	update_step(&game->player, pos);
 	game->player.pos = pos;
+}
+
+void	update_step(t_player *player, t_vector2d pos)
+{
+	if (abs(player->pos.x - player->last_pos.x) >= 16 || abs(player->pos.y -player->last_pos.y) >= 16)
+	{
+		player->last_pos = pos;
+		player->step++;
+		printf("Step %d\n", player->step);
+	}
 }
 
 void	remove_key(t_game *game, int id)

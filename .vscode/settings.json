@@ -18,6 +18,7 @@
 		"vector2d.h": "c",
 		"initializer_list": "c",
 		"utils.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"errors.h": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:36:18 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/26 19:10:33 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:46:44 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_vars
 void	init_window(t_game *game);
 void	init_renderer(t_game *game);
 void	clear_display(t_game *game);
-int		init_texture(t_game *game);
+void	init_texture(t_game *game);
 void	render(t_game *game);
 
 #endif //RENDER_H

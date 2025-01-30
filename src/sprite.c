@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:50:49 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/29 18:31:34 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:19:34 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../Libft/libft.h"
 #include <stdlib.h>
 
-void	free_sprite_manger(t_game *game)
+void	free_sprite_manager(t_game *game)
 {
 	if (game->s_manager->wall)
 		mlx_destroy_image(game->vars.mlx, game->s_manager->wall->img_ptr);
@@ -38,13 +38,16 @@ t_sprite_manager	*init_sprite_manager(t_game	*game)
 
 	tmp = malloc(sizeof(t_sprite_manager));
 	if (!tmp)
-		return (NULL);
+		free_errors(game, SPRITE_MANAGER_NOT_LOADED);
 	tmp->exit = new_sprite(game->vars.mlx, "img/exit.xpm");
 	tmp->wall = new_sprite(game->vars.mlx, "img/wall.xpm");
 	tmp->key = new_sprite(game->vars.mlx, "img/key.xpm");
 	tmp->player = new_sprite(game->vars.mlx, "img/idle.xpm");
-	if (!tmp->exit || !tmp->wall || !tmp->key)
-		return (NULL);
+	if (!tmp->exit || !tmp->wall || !tmp->key || !tmp->player)
+	{
+		game->s_manager = tmp;	
+		free_errors(game, SPRITE_MANAGER_NOT_FULLY_LOADED);
+	}
 	return (tmp);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:36:16 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/29 19:12:34 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:44:43 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,18 @@
 #include "../inc/sprite.h"
 #include <stdio.h>
 #include <string.h>
+#include "../inc/errors.h"
 
 void	init_window(t_game *game)
 {
 	if (!game)
-		return ;
+		free_errors(game, GAME_NOT_LOADED);
 	game->vars.mlx = mlx_init();
 	if (!game->vars.mlx)
-		return ;
+		free_errors(game, MLX_NOT_LOADED);
 	game->vars.win = mlx_new_window(game->vars.mlx, WIN_W, WIN_H, "Game");
+	if (!game->vars.win)
+		free_errors(game, WIN_NOT_LOADED);
 }
 
 /*
@@ -31,19 +34,18 @@ void	init_window(t_game *game)
 	Init entity
 	Init UI
 */
-int	init_texture(t_game *game)
+void	init_texture(t_game *game)
 {
 	game->main_buffer.img_ptr = mlx_new_image(game->vars.mlx, WIN_W, WIN_H);
 	if (!game->main_buffer.img_ptr)
-		return (0);
+		free_errors(game, MAIN_BUFFER_IMG_PTR_NOT_LOADED);
 	game->main_buffer.buffer = mlx_get_data_addr
 		(game->main_buffer.img_ptr, &game->main_buffer.bpp,
 			&game->main_buffer.line_len, &game->main_buffer.endian);
 	if (!game->main_buffer.buffer)
-		return (0);
+		free_errors(game, MAIN_BUFFER_NOT_LOADED);
 	game->main_buffer.width = WIN_W;
 	game->main_buffer.height = WIN_H;
-	return (1);
 }
 
 /*

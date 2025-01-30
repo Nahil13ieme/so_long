@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   level.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:25 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/29 16:43:47 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:42:10 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,53 +26,80 @@ Puis charger les textures suivant les objets de la carte
 */
 
 void	free_level(t_game *game);
-int		init_level(t_game *game);
+void	init_level(t_game *game);
 t_level	parse_level_info(int fd);
 
-void	free_level(t_game *game)
+void	free_dfs(t_dfs *dfs, t_level level)
 {
 	int	i;
 
-	i = 0;
-	if (game->level.layout)
-	{
-		while (i < game->level.width)
-		{
-			if (game->level.layout[i])
-				free(game->level.layout[i]);
-			i++;
-		}
-		free(game->level.layout);
-	}
-	free(game->level.entities);
+	i = -1;
+	while (++i < level.width)
+		free(dfs->visited[i]);
+	free(dfs->visited);
+	free(dfs);
 }
 
-int	init_level(t_game *game)
+int	check_dfs(t_level level)
+{
+	t_dfs	*dfs;
+	int		i;
+
+	dfs = malloc(sizeof(t_dfs));
+	if (!dfs)
+		return (0);
+	dfs->key_count = 0;
+	dfs->has_exit = 0;
+	dfs->pos = level.start;
+	dfs->visited = malloc(sizeof(int *) * level.width);
+	if (!dfs->visited)
+		return (0);
+	i = -1;
+	while (++i < level.width)
+	{
+		dfs->visited[i] = malloc(sizeof(int) * level.height);
+		if (!dfs->visited[i])
+			return (0);
+	}
+	if (!dfs_layout(level, dfs))
+		return (free(dfs), 0);
+	return (free(dfs), 1);
+}
+
+void	init_level(t_game *game)
 {
 	int		fd;
 
 	fd = open("level/level.ber", O_RDONLY);
 	if (fd == -1)
-		return (0);
+		free_errors(game, FD_NOT_OPEN);
 	game->level = parse_level_info(fd);
 	if (game->level.height == 0 || game->level.width == 0)
-		return (0);
+		free_errors(game, LEVEL_NOT_LOADED);
+	init_level_2(game);
+	game->level.keys = malloc(sizeof(t_vector2d));
+	if (!game->level.keys)
+		free_errors(game, SPRITE_MANAGER_NOT_FULLY_LOADED);
+	if (!check_level_info(&game->level))
+		free_errors(game, SPRITE_MANAGER_NOT_FULLY_LOADED);
+	game->level.entities = malloc(sizeof(t_entity)
+			* game->level.entities_count);
+	add_entities(game, &game->level);
+	if (!check_dfs(game->level))
+		free_errors(game, SPRITE_MANAGER_NOT_FULLY_LOADED);
+	if (!init_player(game, &game->player))
+		free_errors(game, SPRITE_MANAGER_NOT_FULLY_LOADED);
+	close(fd);
+}
+
+void	init_level_2(t_game *game)
+{
 	game->level.is_done = 0;
 	game->level.has_exit = 0;
 	game->level.has_player = 0;
 	game->level.entities_count = 0;
 	game->level.key_count = 0;
 	game->level.entities = NULL;
-	if (!check_level_info(&game->level)
-		|| game->level.height < 4 || game->level.width < 4)
-		return (0);
-	game->level.entities = malloc(sizeof(t_entity)
-			* game->level.entities_count);
-	add_entities(game, &game->level);
-	if (!init_player(game, &game->player))
-		return (0);
-	close(fd);
-	return (1);
 }
 
 t_level	parse_level_info(int fd)

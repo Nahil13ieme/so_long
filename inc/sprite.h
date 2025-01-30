@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:30:11 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/29 18:09:52 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:06:39 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_sprite_manager
 }	t_sprite_manager;
 
 t_sprite_manager	*init_sprite_manager(t_game	*game);
-void				free_sprite_manger(t_game *game);
+void				free_sprite_manager(t_game *game);
 void				draw_sprite_to_buffer(t_sprite *buffer, t_sprite *sprite, int x_offset, int y_offset);
 t_sprite			*new_sprite(void *mlx, char *filepath);
 
