@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:11 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/30 14:23:28 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:17:04 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../inc/player.h"
 #include "../inc/collision.h"
 #include "../inc/utils.h"
+#include "../ft_printf/ft_printf.h"
 #include <math.h>
 
 int	init_player(t_game *game, t_player *player)
@@ -27,7 +28,7 @@ int	init_player(t_game *game, t_player *player)
 	player->hitbox.max = (t_vector2d){player->pos.x + 12, player->pos.y + 16};
 	if (!player->sprite || !player->sprite->buffer)
 	{
-		printf("failed init player");
+		ft_printf("failed init player");
 		return (0);
 	}
 	player->hit_box = draw_box(game->vars.mlx, player->hitbox.min, player->hitbox.max);
@@ -72,7 +73,7 @@ void	update_step(t_player *player, t_vector2d pos)
 	{
 		player->last_pos = pos;
 		player->step++;
-		printf("Step %d\n", player->step);
+		ft_printf("Step %d\n", player->step);
 	}
 }
 

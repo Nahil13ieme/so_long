@@ -1,7 +1,7 @@
 CC = cc
 FLAGS = -Wall -Wextra -Werror
 
-NAME = libftprintf.a
+NAME = ftprintf.a
 
 LIBFT = ft_printf.h
 

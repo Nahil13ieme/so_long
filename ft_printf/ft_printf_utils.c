@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbenhami <nbenhami@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:52:26 by nbenhami          #+#    #+#             */
-/*   Updated: 2024/11/20 21:17:46 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:21:28 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

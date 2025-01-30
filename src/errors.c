@@ -6,18 +6,19 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:20 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/30 17:59:44 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:15:45 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/errors.h"
 #include "../inc/game.h"
+#include "../ft_printf/ft_printf.h"
 #include "errors.h"
 
 static void	free_game_not_loaded(t_game *game, int child)
 {
 	if (!child)
-		printf("Error\nGame not loaded\n");
+		ft_printf("Error\nGame not loaded\n");
 	(void)game;
 	exit(EXIT_FAILURE);
 }
@@ -25,7 +26,7 @@ static void	free_game_not_loaded(t_game *game, int child)
 static void	free_mlx_not_loaded(t_game *game, int child)
 {
 	if (!child)
-		printf("Error\nMlx not loaded\n");
+		ft_printf("Error\nMlx not loaded\n");
 	(void)game;
 	exit(EXIT_FAILURE);
 }
@@ -33,7 +34,7 @@ static void	free_mlx_not_loaded(t_game *game, int child)
 static void	free_window_not_loaded(t_game *game, int child)
 {
 	if (!child)
-		printf("Error\nWindow not loaded\n");
+		ft_printf("Error\nWindow not loaded\n");
 	mlx_destroy_display(game->vars.mlx);
 	free(game->vars.mlx);
 	exit(EXIT_FAILURE);
@@ -42,7 +43,7 @@ static void	free_window_not_loaded(t_game *game, int child)
 static void	free_main_buffer_img_ptr_not_loaded(t_game *game, int child)
 {
 	if (!child)
-		printf("Error\nMain buffer img ptr not loaded\n");
+		ft_printf("Error\nMain buffer img ptr not loaded\n");
 	mlx_destroy_window(game->vars.mlx, game->vars.win);
 	mlx_destroy_display(game->vars.mlx);
 	free(game->vars.mlx);
@@ -52,7 +53,7 @@ static void	free_main_buffer_img_ptr_not_loaded(t_game *game, int child)
 static void	free_main_buffer_not_loaded(t_game *game, int child)
 {
 	if (!child)
-		printf("Error\nMain buffer not loaded\n");
+		ft_printf("Error\nMain buffer not loaded\n");
 	mlx_destroy_image(game->vars.mlx, game->main_buffer.img_ptr);
 	mlx_destroy_window(game->vars.mlx, game->vars.win);
 	mlx_destroy_display(game->vars.mlx);
@@ -63,7 +64,7 @@ static void	free_main_buffer_not_loaded(t_game *game, int child)
 static void	free_sprite_manager_not_loaded(t_game *game, int child)
 {
 	if (!child)
-		printf("Error\nError\nSprite manager not loaded\n");
+		ft_printf("Error\nError\nSprite manager not loaded\n");
 	mlx_destroy_image(game->vars.mlx, game->main_buffer.img_ptr);
 	mlx_destroy_window(game->vars.mlx, game->vars.win);
 	mlx_destroy_display(game->vars.mlx);
@@ -74,7 +75,7 @@ static void	free_sprite_manager_not_loaded(t_game *game, int child)
 static void	free_sprite_manager_not_fully_loaded(t_game *game, int child)
 {
 	if (!child)
-		printf("Error\nSprite manager not fully loaded\n");
+		ft_printf("Error\nSprite manager not fully loaded\n");
 	if (game->s_manager->wall)
 		mlx_destroy_image(game->vars.mlx, game->s_manager->wall->img_ptr);
 	if (game->s_manager->exit)
@@ -95,7 +96,7 @@ static void	free_sprite_manager_not_fully_loaded(t_game *game, int child)
 static void	free_fd_not_open(t_game *game, int child)
 {
 	if (!child)
-		printf("Error\nFd not open\n");
+		ft_printf("Error\nFd not open\n");
 	free_sprite_manager_not_fully_loaded(game, 1);
 	exit(EXIT_FAILURE);
 }
@@ -106,7 +107,7 @@ static void	free_level(t_game *game, int child)
 
 	i = 0;
 	if (!child)
-		printf("Level not loaded\n");
+		ft_printf("Level not loaded\n");
 	if (game->level.layout)
 	{
 		while (i < game->level.width)

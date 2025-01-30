@@ -6,13 +6,14 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:21 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/30 17:42:18 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:16:31 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/game.h"
 #include "../inc/render.h"
 #include "../inc/time_game.h"
+#include "../ft_printf/ft_printf.h"
 
 int	handle_keypress(int keycode, t_game *game)
 {
@@ -57,7 +58,12 @@ int	game_loop(t_game *game)
 	move_player(game);
 	check_key_looted(game);
 	if (game->stop)
+	{
+		ft_printf("\nGG\n");
+		ft_printf("\nGG\n");
+		ft_printf("\nGG\n");
 		free_all(game);
+	}
 	render(game);
 	cap_fps();
 	return (1);
