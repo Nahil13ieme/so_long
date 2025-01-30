@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:25 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/30 15:42:10 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:58:50 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	free_dfs(t_dfs *dfs, t_level level)
 
 	i = -1;
 	while (++i < level.width)
-		free(dfs->visited[i]);
+		if (dfs->visited[i])
+			free(dfs->visited[i]);
 	free(dfs->visited);
 	free(dfs);
 }
@@ -53,17 +54,20 @@ int	check_dfs(t_level level)
 	dfs->pos = level.start;
 	dfs->visited = malloc(sizeof(int *) * level.width);
 	if (!dfs->visited)
+	{
+		free(dfs);
 		return (0);
+	}
 	i = -1;
 	while (++i < level.width)
 	{
 		dfs->visited[i] = malloc(sizeof(int) * level.height);
 		if (!dfs->visited[i])
-			return (0);
+			return (free_dfs(dfs, level), 0);
 	}
 	if (!dfs_layout(level, dfs))
-		return (free(dfs), 0);
-	return (free(dfs), 1);
+		return (free_dfs(dfs, level), 0);
+	return (free_dfs(dfs, level), 1);
 }
 
 void	init_level(t_game *game)

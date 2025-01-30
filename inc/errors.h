@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:21:06 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/30 15:33:13 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:28:53 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ typedef enum e_errors
 } t_errors;
 
 void	free_errors(t_game *game, int i);
-
+void	free_all(t_game *game);
 #endif //ERRORS_H

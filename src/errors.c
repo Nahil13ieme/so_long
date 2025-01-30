@@ -6,12 +6,13 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:20 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/30 15:43:53 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:38:39 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/errors.h"
 #include "../inc/game.h"
+#include "errors.h"
 
 static void	free_game_not_loaded(t_game *game, int child)
 {
@@ -142,4 +143,11 @@ void	free_errors(t_game *game, int i)
 		free_fd_not_open(game, 0);
 	else if (i == LEVEL_NOT_LOADED)
 		free_level(game, 0);
+}
+
+void free_all(t_game *game)
+{
+	mlx_destroy_image(game->vars.mlx, game->player.hit_box->img_ptr);
+	free(game->player.hit_box);
+	free_level(game, 1);
 }

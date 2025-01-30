@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:21:10 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/30 15:42:23 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:27:11 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef struct s_game		t_game;
 typedef struct s_entity		t_entity;
 typedef struct s_sprite		t_sprite;
+typedef struct s_dfs		t_dfs;
 
 typedef struct s_level
 {
