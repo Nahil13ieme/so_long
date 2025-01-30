@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:54:08 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/29 22:05:02 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:46:18 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../inc/entity.h"
 #include "../inc/game.h"
 
-int	check_level_info(t_level *level)
+int	 check_level_info(t_level *level)
 {
 	int	i;
 	int	j;
@@ -26,7 +26,7 @@ int	check_level_info(t_level *level)
 		j = 0;
 		while (level->layout[i][j])
 		{
-			if (!level->layout[i][j] && !check_borders(i,
+			if (!level->layout[i][j] || !check_borders(i,
 				j, level->layout[i][j], level))
 				return (0);
 			if (!check_unique_entities(level->layout[i][j], level, i, j))

@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:25 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/30 16:58:50 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:54:59 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,17 @@ int	check_dfs(t_level level)
 	dfs->key_count = 0;
 	dfs->has_exit = 0;
 	dfs->pos = level.start;
+	dfs->prev_pos = dfs->pos;
 	dfs->visited = malloc(sizeof(int *) * level.width);
 	if (!dfs->visited)
-	{
-		free(dfs);
-		return (0);
-	}
+		return (free(dfs), 0);
 	i = -1;
 	while (++i < level.width)
 	{
 		dfs->visited[i] = malloc(sizeof(int) * level.height);
 		if (!dfs->visited[i])
 			return (free_dfs(dfs, level), 0);
+		ft_memset(dfs->visited[i], 0, level.height * sizeof(int));
 	}
 	if (!dfs_layout(level, dfs))
 		return (free_dfs(dfs, level), 0);
@@ -83,16 +82,16 @@ void	init_level(t_game *game)
 	init_level_2(game);
 	game->level.keys = malloc(sizeof(t_vector2d));
 	if (!game->level.keys)
-		free_errors(game, SPRITE_MANAGER_NOT_FULLY_LOADED);
+		free_errors(game, LEVEL_NOT_LOADED);
 	if (!check_level_info(&game->level))
-		free_errors(game, SPRITE_MANAGER_NOT_FULLY_LOADED);
+		free_errors(game, LEVEL_NOT_LOADED);
 	game->level.entities = malloc(sizeof(t_entity)
 			* game->level.entities_count);
 	add_entities(game, &game->level);
 	if (!check_dfs(game->level))
-		free_errors(game, SPRITE_MANAGER_NOT_FULLY_LOADED);
+		free_errors(game, LEVEL_NOT_LOADED);
 	if (!init_player(game, &game->player))
-		free_errors(game, SPRITE_MANAGER_NOT_FULLY_LOADED);
+		free_errors(game, LEVEL_NOT_LOADED);
 	close(fd);
 }
 
