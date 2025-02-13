@@ -6,21 +6,25 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:51:19 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/28 16:57:53 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:56:07 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TIME_H
-# define TIME_H
+#ifndef TIME_GAME_H
+# define TIME_GAME_H
 
-#include <time.h>
-#include <unistd.h>
+# include <time.h>
+# include <unistd.h>
 
-# define TARGET_FPS 60
-# define FRAME_TIME_MS (1000 / TARGET_FPS)
+# ifndef TARGET_FPS
+#  define TARGET_FPS 60
+# endif
 
+enum e_fps
+{
+	FRAME_TIME_MS = (1000 / TARGET_FPS)
+};
 
 void	cap_fps(void);
 
-
-#endif //TIME_H
+#endif //TIME_GAME_H

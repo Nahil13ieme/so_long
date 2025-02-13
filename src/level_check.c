@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:54:08 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/30 17:46:18 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:47:25 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../inc/entity.h"
 #include "../inc/game.h"
 
-int	 check_level_info(t_level *level)
+int	check_level_info(t_level *level)
 {
 	int	i;
 	int	j;
@@ -73,8 +73,9 @@ int	check_unique_entities(char c, t_level *level, int i, int j)
 	if (c == 'K')
 	{
 		level->key_count += 1;
-		level->keys = ft_realloc(level->keys, sizeof(t_vector2d) * level->key_count);
-		level->keys[level->key_count - 1] = (t_vector2d){i,j};
+		level->keys = ft_realloc(level->keys,
+				sizeof(t_vector2d) * level->key_count);
+		level->keys[level->key_count - 1] = (t_vector2d){i, j};
 	}
 	return (1);
 }

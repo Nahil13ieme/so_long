@@ -6,15 +6,15 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:36:18 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/30 14:46:44 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:56:56 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
 
-#include "sprite.h"
-#include "../minilibx-linux/mlx.h"
+# include "sprite.h"
+# include "../minilibx-linux/mlx.h"
 
 # define WIN_W 800
 # define WIN_H 600

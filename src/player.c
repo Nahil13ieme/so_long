@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:11 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/30 18:17:04 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:46:48 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	init_player(t_game *game, t_player *player)
 		ft_printf("failed init player");
 		return (0);
 	}
-	player->hit_box = draw_box(game->vars.mlx, player->hitbox.min, player->hitbox.max);
+	player->hit_box = draw_box(game->vars.mlx,
+			player->hitbox.min, player->hitbox.max);
 	player->velocity.x = 0;
 	player->velocity.y = 0;
 	player->key = 0;
@@ -69,7 +70,8 @@ void	move_player(t_game *game)
 
 void	update_step(t_player *player, t_vector2d pos)
 {
-	if (abs(player->pos.x - player->last_pos.x) >= 16 || abs(player->pos.y -player->last_pos.y) >= 16)
+	if (abs(player->pos.x - player->last_pos.x) >= 16
+		|| abs(player->pos.y - player->last_pos.y) >= 16)
 	{
 		player->last_pos = pos;
 		player->step++;

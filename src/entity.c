@@ -6,12 +6,14 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:18 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/29 21:48:08 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:39:35 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/entity.h"
 #include "../inc/sprite.h"
+#include "../inc/level.h"
+#include "../inc/game.h"
 
 t_entity	new_entity(t_sprite *sprite, t_type type, int *id, t_vector2d pos)
 {
@@ -39,4 +41,31 @@ void	set_entity_name(t_entity *entity)
 		entity->name = "EXIT";
 	if (entity->type == ENEMY)
 		entity->name = "ENEMY";
+}
+
+void	add_entities(t_sprite_manager *s_man, t_level *level)
+{
+	int			i;
+	int			j;
+	int			id;
+	t_vector2d	pos;
+
+	i = 0;
+	id = 0;
+	while (i < level->width)
+	{
+		j = 0;
+		while (level->layout[i][j])
+		{
+			pos = (t_vector2d){i, j};
+			if (level->layout[i][j] == 'W')
+				level->entities[id] = new_entity(s_man->wall, WALL, &id, pos);
+			if (level->layout[i][j] == 'E')
+				level->entities[id] = new_entity(s_man->exit, EXIT, &id, pos);
+			if (level->layout[i][j] == 'K')
+				level->entities[id] = new_entity(s_man->key, KEY, &id, pos);
+			j++;
+		}
+		i++;
+	}
 }

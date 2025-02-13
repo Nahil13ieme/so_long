@@ -6,14 +6,14 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:23:45 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/28 17:43:36 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:48:32 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLLISION_H
 # define COLLISION_H
 
-#include "vector2d.h"
+# include "vector2d.h"
 
 typedef struct s_box
 {

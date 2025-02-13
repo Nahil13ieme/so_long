@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:50:49 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/30 15:19:34 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:46:10 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_sprite_manager	*init_sprite_manager(t_game	*game)
 	tmp->player = new_sprite(game->vars.mlx, "img/idle.xpm");
 	if (!tmp->exit || !tmp->wall || !tmp->key || !tmp->player)
 	{
-		game->s_manager = tmp;	
+		game->s_manager = tmp;
 		free_errors(game, SPRITE_MANAGER_NOT_FULLY_LOADED);
 	}
 	return (tmp);

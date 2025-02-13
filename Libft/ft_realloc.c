@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 19:37:22 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/28 10:18:22 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:27:01 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	*ft_realloc(void *ptr, size_t new_size)
 {
 	void	*ret;
-	
+
 	if (new_size == 0)
 	{
 		free(ptr);

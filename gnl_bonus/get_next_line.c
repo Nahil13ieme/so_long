@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 20:47:41 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/28 10:52:23 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:27:34 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ char	*ft_get_line(char *buffer)
 		res[j] = buffer[j];
 		j++;
 	}
-	//if (buffer[j] == '\n')
-		//res[j++] = '\n';
 	res[j] = 0;
 	return (res);
 }

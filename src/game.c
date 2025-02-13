@@ -6,7 +6,7 @@
 /*   By: nbenhami <nbenhami@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 15:15:21 by nbenhami          #+#    #+#             */
-/*   Updated: 2025/01/30 18:16:31 by nbenhami         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:47:00 by nbenhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	handle_key_release(int keycode, t_game *game)
 	I need to cap fps for the velocity to works,
 	else my velocity will be too high;
 */
+
 int	game_loop(t_game *game)
 {
 	move_player(game);
